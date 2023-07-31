@@ -3,34 +3,17 @@ namespace Saaya.Web
     public class Program
     {
         public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+            => CreateHostBuilder(args).Build().Run();
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
-
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+        public static IHostBuilder CreateHostBuilder(string[] args)
+            => Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(x =>
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+                x.UseStartup<Saaya>();
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            app.Run();
-        }
+#if !DEBUG
+                x.UseUrls("http://0.0.0.0:2201");
+#endif
+            });
     }
 }
