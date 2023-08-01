@@ -19,7 +19,7 @@ namespace Saaya.Web.Controllers
             _db = db;
         }
 
-        public IActionResult index()
+        public IActionResult docs()
         {
             return View();
         }
