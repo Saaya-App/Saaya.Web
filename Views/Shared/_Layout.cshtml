@@ -1,49 +1,87 @@
-﻿<!DOCTYPE html>
+﻿@using Saaya.Web.Common.Extensions;
+@using Saaya.Web.Utility;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Saaya.Web</title>
+    <title>@ViewData["Title"] - Saaya</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Saaya.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/saaya-1st.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Saaya.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    <nav class="saaya-header">
+        <div class="saaya-header-left">
+            <img src="https://avatars.githubusercontent.com/u/123821243?v=4" alt="pfp" />
+            <span class="saaya-header__label">
+                Saaya
+            </span>
+        </div>
+        <div class="saaya-header-right">
+            <ul class="saaya-header__list">
+                <li class="saaya-header__item">
+                    <a class="saaya-header__button" asp-controller="home" asp-action="index">HOME</a>
+                </li>
+                <li class="saaya-header__item">
+                    <a class="saaya-header__button" asp-controller="blog" asp-action="index">BLOG</a>
+                </li>
+                <li class="saaya-header__item">
+                    <a class="saaya-header__button" href="https://discord.gg/Ky8AXeRgWt">DISCORD</a>
+                </li>
+                @if (Context.Session.IsAuthenticated())
+                {
+                    <li class="saaya-header__item">
+                        <a class="saaya-header__button" asp-controller="account" asp-action="logout">LOGOUT</a>
+                    </li>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Saaya.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    @if (ViewContext.HttpContext.Session.HasRole(StaticDetails.Admin))
+                    {
+                        <li class="saaya-header__item">
+                            <a class="saaya-header__button" asp-controller="admin" asp-action="index">ADMIN</a>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </nav>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="kagu-footer">
+        <div class="kagu-footer__row">
+            <div class="kagu-footer__column">
+                <img class="kagu-footer__column--subsection__image" src="https://avatars.githubusercontent.com/u/123821243?v=4" alt="pfp" />
+            </div>
+            <div class="kagu-footer__column">
+                <span class="kagu-footer__column--subsection__header">ABOUT</span>
+                <a class="kagu-footer__column--subsection__link" href="https://github.com/Saaya-App">GitHub</a>
+                <a class="kagu-footer__column--subsection__link" asp-controller="contact" asp-action="index">Contact</a>
+                <a class="kagu-footer__column--subsection__link" asp-controller="home" asp-action="policy">Policy</a>
+            </div>
+            <div class="kagu-footer__column">
+                <span class="kagu-footer__column--subsection__header">PRODUCTS</span>
+                <a asp-controller="api" asp-action="index" class="kagu-footer__column--subsection__link">Saaya API</a>
+            </div>
+        </div>
+        <div class="kagu-footer__row">
+            This page is a work in progress, and is a subject to change.
+            <br>
+            SHARE
+            <br>
+            <a target="_blank" href="https://twitter.com/share?url=https%3A%2F%2Faisys.dev%2F&text=Alice%20H.%0Aaisyshk%0A%0AA%20student%20with%20various%20interests%2C%20mostly%20in%20C%23%20and%20C%2B%2B.%0AAreas%20of%20interest%3A%20Back-end%2C%20front-end%2C%20networking%2C%20server%20code">
+                <img style="width: 20px; height: auto; border-radius: 50%;" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/9384edf56607d09037ad46b3c49d979c27ecad18/images/svg/twitter.svg" alt="twitter" />
+            </a>
+            <a target="_blank" href="https://www.facebook.com/login.php?skip_api_login=1&api_key=966242223397117&signed_next=1&next=https%3A%2F%2Fwww.facebook.com%2Fsharer.php%3Fu%3Dhttps%253A%252F%252Faisys.dev%252F&cancel_url=https%3A%2F%2Fwww.facebook.com%2Fdialog%2Fclose_window%2F%3Fapp_id%3D966242223397117%26connect%3D0%23_%3D_&display=popup&locale=en_US">
+                <img style="width: 20px; height: auto; border-radius: 50%;" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/9384edf56607d09037ad46b3c49d979c27ecad18/images/svg/facebook.svg" alt="Facebook" />
+            </a>
+        </div>
+        <div class="kagu-footer__row">
+            &copy; 2023 aisyshk, Saaya. All Rights Reserved.
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

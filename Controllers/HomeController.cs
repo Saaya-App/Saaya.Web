@@ -13,12 +13,12 @@ namespace Saaya.Web.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult privacy()
         {
             return View();
         }
