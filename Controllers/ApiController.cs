@@ -24,7 +24,6 @@ namespace Saaya.Web.Controllers
             return View();
         }
 
-
         [HttpGet]
         [Route("songs/")]
         public IActionResult GetSongsForDevice()
@@ -39,11 +38,11 @@ namespace Saaya.Web.Controllers
             return Ok(_db.Users.GetSongs(AuthToken) ?? new List<Song>());
         }
 
-        [HttpGet]
+        [HttpGet]   
         [Route("playlists/")]
         public IActionResult GetPlaylistsForDevice()
         {
-            string AuthToken = HttpContext.Request.Headers["Authorization"];
+            string AuthToken = HttpContext.Request.Headers["Authorization"].ToString().Split(" ")[1];
             if (string.IsNullOrEmpty(AuthToken))
                 return BadRequest(new List<Playlist>());
 
@@ -57,7 +56,7 @@ namespace Saaya.Web.Controllers
         [Route("playlists/songs")]
         public IActionResult GetAllSongsForPlaylist(int playlist)
         {
-            string AuthToken = HttpContext.Request.Headers["Authorization"];
+            string AuthToken = HttpContext.Request.Headers["Authorization"].ToString().Split(" ")[1];
             if (string.IsNullOrEmpty(AuthToken))
                 return BadRequest(new List<Song>());
 
