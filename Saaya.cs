@@ -18,9 +18,10 @@ namespace Saaya.Web
             services.AddMarkdown();
             services.AddControllersWithViews();
             services.AddMemoryCache();
+            services.AddSession();
 
             // To Do: Add Db + GitHub OAuth login
-            services.AddDbContext<SaayaWebContext>(options => options.UseSqlite("Data Source=web.db"));
+            services.AddDbContext<SaayaWebContext>(options => options.UseSqlite("Data Source=saaya.db"));
 
             services.AddScoped<SaayaWebContext>();
             //services.AddScoped<GitHubHandler>();

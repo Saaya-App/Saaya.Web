@@ -11,9 +11,4 @@
     <PackageReference Include="Westwind.AspNetCore.Markdown" Version="3.11.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Db\Models\" />
-    <Folder Include="Db\Extensions\" />
-  </ItemGroup>
-
 </Project>
