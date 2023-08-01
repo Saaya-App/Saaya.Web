@@ -14,14 +14,16 @@ namespace Saaya.Web.Controllers
         }
 
         public IActionResult index()
-        {
-            return View();
-        }
+            => View();
+
+        public IActionResult about()
+            => View();
 
         public IActionResult privacy()
-        {
-            return View();
-        }
+            => View();
+
+        public IActionResult contact()
+            => View();
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
