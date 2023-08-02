@@ -1,0 +1,59 @@
+﻿@using Saaya.Web.Db.Models;
+@using Saaya.Web.Utility;
+@model Post
+
+@{
+    var title = "New Post";
+    ViewData["Title"] = title;
+}
+
+<div class="bp-liw__container">
+    <span class="bp-liw__header-title">
+        @ViewData["Title"]
+    </span>
+    <div class="bp-liw__content">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" style="color: rgb(255, 60, 60);"></div>
+
+            @if (Model.Id != 0)
+            {
+                title = "Edit Post";
+                <input type="hidden" asp-for="Id">
+            }
+
+            <label style="font-size: 24px;" asp-for="Image">Post Image: </label>
+            <br />
+            <input class="sp-liw__form-input" type="text" asp-for="Image" />
+            <span asp-validation-for="Image" style="color: rgb(255, 60, 60);"></span>
+
+            <hr style="border: 1px white;" />
+
+            <label style="font-size: 24px;" asp-for="Title">Post Title: </label>
+            <br />
+            <input class="sp-liw__form-input" type="text" asp-for="Title" />
+            <span asp-validation-for="Title" style="color: rgb(255, 60, 60);"></span>
+
+            <hr style="border: 1px white;" />
+
+            <label style="font-size: 24px;" asp-for="Content">Post Content: </label>
+            <br />
+            <textarea class="sp-liw__form-input" id="postContentArea" type="text" asp-for="Content" placeholder="My awesome post!" style="width: 45vw; height: 500px;" onchange="livePreviewUpdate();" oninput="livePreviewUpdate();"></textarea>
+            <span asp-validation-for="Content" style="color: rgb(255, 60, 60);"></span>
+
+            <input type="hidden" asp-for="DateCreated" value="@DateTimeOffset.UtcNow.ToUnixTimeSeconds()" />
+
+            <br />
+
+            <button class="saaya-header__button" type="submit">
+                @if (Model.Id != 0)
+                {
+                    <span>Update</span>
+                }
+                else
+                {
+                    <span>Add</span>
+                }
+            </button>
+        </form>
+    </div>
+</div>

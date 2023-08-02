@@ -1,0 +1,48 @@
+﻿@using Saaya.Web.Db.Models;
+@using Saaya.Web.Utility;
+@using Westwind.AspNetCore.Markdown;
+@model Post
+
+@{
+    ViewData["Title"] = @$"{Model.Title}";
+}
+
+<head>
+    <meta property="og:image" content="@Model.Image" />
+    <meta property="og:title" content="@Model.Title" />
+    <meta property="og:description" content="@(Model.Content.Substring(0, Math.Min(Model.Content.Length, 150)))...." />
+    <meta property="og:url" content="https://saaya.dev/blog/@Model.Id" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="en_US" />
+</head>
+
+<div class="bp-liw__container">
+    <span class="bp-liw__header-title">
+        @Model.Title
+        <span style="display: flex; flex-direction: row; gap: 0.35rem;">
+            <span class="bp-liw__date--last_update">Posted At:</span>
+            <i class="bp-liw__date">@((new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Model.DateCreated).ToString("MM/dd/yyyy")))</i>
+        </span>
+
+        @*// This can be used for tags
+        <span style="display: flex; flex-direction: row; gap: 0.35rem;">
+        <a href="#" style="font-size: 14px; color: rgb(255, 70, 150);">CODING</a><a href="#" style="font-size: 14px; color: rgb(255, 70, 150);">CODING</a><a href="#" style="font-size: 14px; color: rgb(255, 70, 150);">CODING</a>
+        </span>*@
+    </span>
+    <div class="bp-liw__header">
+        <img class="bp-liw__header-image" src="@Model.Image" alt="thumbnail">
+    </div>
+    <div class="bp-liw__content">
+        @Markdown.ParseHtmlString(Model.Content.Emojify(), sanitizeHtml: false)
+        @if (Context.Session.GetInt32("UserId") > 0)
+        {
+            @if (ViewContext.HttpContext.Session.GetString("UserRole").Split(",").Contains(StaticDetails.Admin))
+            {
+                <br />
+                <div class="bp-liw__content">
+                    <a class="kagu-header__button" asp-controller="blog" asp-action="add" asp-route-id="@Model.Id">Edit</a>
+                </div>
+            }
+        }
+    </div>
+</div>

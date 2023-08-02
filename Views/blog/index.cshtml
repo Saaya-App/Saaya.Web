@@ -1,0 +1,67 @@
+﻿@using Saaya.Web.Db.Models;
+@using Saaya.Web.Utility;
+@model IEnumerable<Post>
+
+@{
+    ViewData["Title"] = "Blog";
+}
+
+<div class="sp-liw__container">
+    <span class="sp-liw__header-title">
+        Blog
+
+        <span class="sp-liw__date--last_update">Latest Blog Post</span>
+    </span>
+    <div class="sp-liw__posts--list">
+        <div class="sp-liw__posts--list__primary">
+            <img class="sp-liw__header-image" src="@Model.FirstOrDefault()?.Image" alt="thumbnail">
+        </div>
+        <div class="sp-liw__posts--list__secondary">
+            <span class="sp-liw__posts--list__secondary-title">
+                @Model.FirstOrDefault()?.Title
+                <br>
+                <span class="sp-liw__posts--list__secondary-date">
+                    @((new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Model.FirstOrDefault().DateCreated).ToString("MM/dd/yyyy")))
+                </span>
+            </span>
+            <p class="sp-liw__posts--excerpt">
+                "@(@Model.FirstOrDefault()?.Content.Substring(0, Math.Min(@Model.FirstOrDefault().Content.Length, 35)))..."
+                <br />
+                <br />
+                <a class="saaya-header__button" asp-controller="blog" asp-action="post" asp-route-id="@Model.FirstOrDefault()?.Id">
+                    <b>READ MORE →</b>
+                </a>
+            </p>
+        </div>
+    </div>
+    <div class="sp-liw__posts--divider">
+        <hr style="color: var(--accent);">
+    </div>
+    <span class="sp-liw__header-title">
+        Older Posts
+    </span>
+    <div class="sp-liw__content" style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+        <ul class="sp-liw__posts-related--list">
+            @foreach (var post in Model.Skip(1))
+            {
+                <li class="sp-liw__posts-related--item">
+                    <a asp-controller="blog" asp-action="post" asp-route-id="@post.Id" class="bp-liw__posts--link__container">
+                        <span class="sp-liw__posts-related--item__title">
+                            @post.Title
+                        </span>
+                        &ensp;
+                        &ensp;
+                        &ensp;
+                        &ensp;
+                        &ensp;
+                        &ensp;
+                        &ensp;
+                        &ensp;
+                        &ensp;
+                        <span class="sp-liw__posts--list__secondary-date">@((new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Model.FirstOrDefault().DateCreated).ToString("MM/dd/yyyy")))</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
