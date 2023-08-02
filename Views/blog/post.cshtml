@@ -1,4 +1,5 @@
-﻿@using Saaya.Web.Db.Models;
+﻿@using Saaya.Web.Common.Extensions;
+@using Saaya.Web.Db.Models;
 @using Saaya.Web.Utility;
 @using Westwind.AspNetCore.Markdown;
 @model Post
@@ -33,14 +34,14 @@
         <img class="sp-liw__header-image" src="@Model.Image" alt="thumbnail">
     </div>
     <div class="sp-liw__content">
-        @Markdown.ParseHtmlString(Model.Content.Emojify(), sanitizeHtml: false)
-        @if (Context.Session.GetInt32("UserId") > 0)
+        @Markdown.ParseHtmlString(Model.Content, sanitizeHtml: false)
+        @if (Context.Session.IsAuthenticated())
         {
-            @if (ViewContext.HttpContext.Session.GetString("UserRole").Split(",").Contains(StaticDetails.Admin))
+            @if (ViewContext.HttpContext.Session.HasRole(StaticDetails.Admin))
             {
                 <br />
                 <div class="sp-liw__content">
-                    <a class="kagu-header__button" asp-controller="blog" asp-action="add" asp-route-id="@Model.Id">Edit</a>
+                    <a class="saaya-header__button" asp-controller="blog" asp-action="add" asp-route-id="@Model.Id">Edit</a>
                 </div>
             }
         }

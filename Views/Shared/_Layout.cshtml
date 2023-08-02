@@ -41,13 +41,13 @@
                 @if (Context.Session.IsAuthenticated())
                 {
                     <li class="saaya-header__item">
-                        <a class="saaya-header__button" asp-controller="account" asp-action="logout">LOGOUT</a>
+                        <a class="saaya-header__button" asp-controller="admin" asp-action="logout">Logout</a>
                     </li>
 
                     @if (ViewContext.HttpContext.Session.HasRole(StaticDetails.Admin))
                     {
                         <li class="saaya-header__item">
-                            <a class="saaya-header__button" asp-controller="admin" asp-action="index">ADMIN</a>
+                            <a class="saaya-header__button" asp-controller="admin" asp-action="index">Admin</a>
                         </li>
                     }
                 }

@@ -891,6 +891,20 @@ strong code {
     align-items: center;
 }
 
+.saaya-timeline__numerals {
+    display: flex;
+    padding: 5px;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.saaya-timeline__num {
+    color: var(--secondary);
+    font-weight: 500;
+    -webkit-transform: rotate(-45deg);
+}
+
 .saaya-timeline {
     display: flex;
     width: 100%;
