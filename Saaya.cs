@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Saaya.Web.Db;
+using Saaya.Web.Services;
 using Westwind.AspNetCore.Markdown;
 
 namespace Saaya.Web
@@ -15,16 +16,15 @@ namespace Saaya.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMarkdown();
+            //services.AddMarkdown();
             services.AddControllersWithViews();
             services.AddMemoryCache();
             services.AddSession();
 
             // To Do: Add Db + GitHub OAuth login
             services.AddDbContext<SaayaWebContext>(options => options.UseSqlite("Data Source=saaya.db"));
-
             services.AddScoped<SaayaWebContext>();
-            //services.AddScoped<GitHubHandler>();
+            services.AddScoped<DiscordLogin>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -41,7 +41,7 @@ namespace Saaya.Web
             app.UseStaticFiles();
             app.UseRouting();
 
-            app.UseMarkdown();
+            //app.UseMarkdown();
 
             app.UseSession();
             app.UseAuthentication();
@@ -49,6 +49,16 @@ namespace Saaya.Web
 
             app.UseEndpoints(x =>
             {
+                x.MapControllerRoute(
+                    name: "blog",
+                    pattern: "blog/{id}",
+                    defaults: new { controller = "blog", action = "post" });
+
+                x.MapControllerRoute(
+                    name: "blog",
+                    pattern: "blog",
+                    defaults: new { controller = "blog", action = "index" });
+
                 x.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=home}/{action=index}/{id?}");
