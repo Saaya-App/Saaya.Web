@@ -36,5 +36,13 @@ namespace Saaya.Web.Controllers
 
             return RedirectToAction("index", "home");
         }
+
+        public IActionResult logout()
+        {
+            HttpContext.Session.SetUInt64("UserId", 0);
+            HttpContext.Session.SetString("UserRole", string.Empty);
+
+            return RedirectToAction("index", "home");
+        }
     }
 }
