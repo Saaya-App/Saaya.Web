@@ -6,9 +6,7 @@ namespace Saaya.Web.Db
     public class SaayaWebContext : DbContext
     {
         public DbSet<SaayaUser> Users { get; set; }
-
-        public DbSet<Song> Songs { get; set; }
-        public DbSet<Playlist> Playlists { get; set; }
+        public DbSet<Post> Posts { get; set; }
 
         public SaayaWebContext(DbContextOptions<SaayaWebContext> options)
             : base(options)
@@ -16,15 +14,6 @@ namespace Saaya.Web.Db
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Playlist>()
-                .HasOne(x => x.User)
-                .WithMany(x => x.Playlists)
-                .HasForeignKey(x => x.UserId);
-
-            modelBuilder.Entity<Song>()
-                .HasOne(x => x.User)
-                .WithMany(x => x.Songs)
-                .HasForeignKey(x => x.UserId);
         }
     }
 }

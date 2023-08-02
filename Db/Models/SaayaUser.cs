@@ -7,16 +7,20 @@ namespace Saaya.Web.Db.Models
         [Required]
         public string Username { get; set; }
 
-        [Required]
-        public string PasswordHash { get; set; }
+        public ulong? Snowflake { get; set; } 
 
-        [Required]
-        public string Email { get; set; }
+        //[Required]
+        //public string PasswordHash { get; set; }
 
-        [Required]
-        public string Token { get; set; }
+        //[Required]
+        //public string Email { get; set; }
 
-        public List<Song> Songs { get; set; } = new List<Song>();
-        public List<Playlist> Playlists { get; set; } = new List<Playlist>();
+        //[Required]
+        //public string Token { get; set; }
+
+        public string Role { get; set; } = "User";
+
+        //public List<Song> Songs { get; set; } = new List<Song>();
+        //public List<Playlist> Playlists { get; set; } = new List<Playlist>();
     }
 }
