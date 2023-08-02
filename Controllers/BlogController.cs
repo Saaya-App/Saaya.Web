@@ -34,6 +34,21 @@ namespace Saaya.Web.Controllers
             return View(_db.Posts.Where(x => x.Id == id).FirstOrDefault());
         }
 
+        [Authorized(Role = nameof(StaticDetails.Admin))]
+        public IActionResult add(int? id)
+        {
+            Post post = new Post();
+
+            if (id == null) { return View(post); }
+
+            post = _db.Posts.FirstOrDefault(x => x.Id == id);
+
+            if (post == null)
+                return NotFound();
+
+            return View(post);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorized(Role = nameof(StaticDetails.Admin))]
