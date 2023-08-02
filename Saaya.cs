@@ -16,7 +16,7 @@ namespace Saaya.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddMarkdown();
+            services.AddMarkdown();
             services.AddControllersWithViews();
             services.AddMemoryCache();
             services.AddSession();
@@ -41,7 +41,7 @@ namespace Saaya.Web
             app.UseStaticFiles();
             app.UseRouting();
 
-            //app.UseMarkdown();
+            app.UseMarkdown();
 
             app.UseSession();
             app.UseAuthentication();

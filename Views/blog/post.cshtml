@@ -16,12 +16,12 @@
     <meta property="og:locale" content="en_US" />
 </head>
 
-<div class="bp-liw__container">
-    <span class="bp-liw__header-title">
+<div class="sp-liw__container">
+    <span class="sp-liw__header-title">
         @Model.Title
         <span style="display: flex; flex-direction: row; gap: 0.35rem;">
-            <span class="bp-liw__date--last_update">Posted At:</span>
-            <i class="bp-liw__date">@((new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Model.DateCreated).ToString("MM/dd/yyyy")))</i>
+            <span class="sp-liw__date--last_update">Posted At:</span>
+            <i class="sp-liw__date">@((new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Model.DateCreated).ToString("MM/dd/yyyy")))</i>
         </span>
 
         @*// This can be used for tags
@@ -29,17 +29,17 @@
         <a href="#" style="font-size: 14px; color: rgb(255, 70, 150);">CODING</a><a href="#" style="font-size: 14px; color: rgb(255, 70, 150);">CODING</a><a href="#" style="font-size: 14px; color: rgb(255, 70, 150);">CODING</a>
         </span>*@
     </span>
-    <div class="bp-liw__header">
-        <img class="bp-liw__header-image" src="@Model.Image" alt="thumbnail">
+    <div class="sp-liw__header">
+        <img class="sp-liw__header-image" src="@Model.Image" alt="thumbnail">
     </div>
-    <div class="bp-liw__content">
+    <div class="sp-liw__content">
         @Markdown.ParseHtmlString(Model.Content.Emojify(), sanitizeHtml: false)
         @if (Context.Session.GetInt32("UserId") > 0)
         {
             @if (ViewContext.HttpContext.Session.GetString("UserRole").Split(",").Contains(StaticDetails.Admin))
             {
                 <br />
-                <div class="bp-liw__content">
+                <div class="sp-liw__content">
                     <a class="kagu-header__button" asp-controller="blog" asp-action="add" asp-route-id="@Model.Id">Edit</a>
                 </div>
             }
