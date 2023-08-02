@@ -20,6 +20,14 @@ body {
     box-sizing: border-box;
 }
 
+::selection {
+    background: rgba(162, 142, 237, 0.4);
+}
+
+::-moz-selection {
+    background: rgba(162, 142, 237, 0.4);
+}
+
 a {
     text-decoration: none;
     color: black;
