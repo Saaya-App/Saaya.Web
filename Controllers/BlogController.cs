@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿#nullable disable
 using Microsoft.AspNetCore.Mvc;
 using Saaya.Web.Common.Attributes;
 using Saaya.Web.Db;
