@@ -91,7 +91,7 @@ a {
 .saaya-header-left__link {
     font-size: 14px;
     font-weight: 400;
-    color: rgb(100, 100, 100);
+    color: rgb(130, 80, 230);
 }
 
 .saaya-header-right {
@@ -136,12 +136,12 @@ a {
     border: 1px solid var(--primary);
     cursor: pointer;
     background-color: white;
-    padding: 6px 40px 7px 40px;
+    padding: 6px 35px 7px 35px;
     text-align: center;
     align-items: center;
     color: var(--primary);
     font-weight: 500;
-    font-size: 15px;
+    font-size: 16px;
     background-size: 100%;
     white-space: nowrap;
     transition: 0.2s cubic-bezier(.14,.45,.48,.98);
@@ -314,6 +314,41 @@ main {
     background-size: 100% auto;
     background-position: center;
     color: var(--tertiary);
+}
+
+.sp-liw__main-split {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.sp-liw__main-split__container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.sp-liw__main-split__container:first-child {
+    width: 45%;
+}
+
+.sp-liw__main-split__image {
+    overflow: hidden;
+    width: 100%;
+}
+
+@media (max-width: 900px)
+{
+    .sp-liw__main-split {
+        flex-direction: column;
+    }
+
+    .sp-liw__main-split__container:first-child {
+        width: auto;
+    }
 }
 
 .sp-liw__container-center {
