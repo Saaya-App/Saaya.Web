@@ -337,7 +337,8 @@ main {
 
 .sp-liw__main-split__image {
     overflow: hidden;
-    width: 100%;
+    height: 85%;
+    width: auto;
 }
 
 @media (max-width: 900px)
