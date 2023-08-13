@@ -51,6 +51,16 @@ namespace Saaya.Web
             {
                 x.MapControllerRoute(
                     name: "blog",
+                    pattern: "blog/add/{id}",
+                    defaults: new { controller = "blog", action = "add" });
+
+                x.MapControllerRoute(
+                    name: "blog",
+                    pattern: "blog/add",
+                    defaults: new { controller = "blog", action = "add" });
+
+                x.MapControllerRoute(
+                    name: "blog",
                     pattern: "blog/{id}",
                     defaults: new { controller = "blog", action = "post" });
 

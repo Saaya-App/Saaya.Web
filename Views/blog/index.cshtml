@@ -1,5 +1,6 @@
 ﻿@using Saaya.Web.Db.Models;
 @using Saaya.Web.Utility;
+@using Westwind.AspNetCore.Markdown;
 @model IEnumerable<Post>
 
 @{
@@ -25,7 +26,7 @@
                 </span>
             </span>
             <p class="sp-liw__posts--excerpt">
-                "@(@Model.FirstOrDefault()?.Content.Substring(0, Math.Min(@Model.FirstOrDefault().Content.Length, 35)))..."
+                @Markdown.ParseHtmlString(Model.FirstOrDefault()?.Content.Substring(0, Math.Min(@Model.FirstOrDefault().Content.Length, 35)) + "...", sanitizeHtml: false)
                 <br />
                 <br />
                 <a class="saaya-header__button" asp-controller="blog" asp-action="post" asp-route-id="@Model.FirstOrDefault()?.Id">
