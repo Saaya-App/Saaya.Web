@@ -12,6 +12,7 @@
 }
 
 body {
+    background-color: rgb(245, 242, 255);
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -193,7 +194,7 @@ main {
     align-items: center;
     gap: 2rem;
     color: rgb(70, 70, 70);
-    background-color: rgb(245, 245, 245);
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 30px 0 30px 0;
     border-top: 1px solid lightgray;
     font-size: 14px;
@@ -339,6 +340,7 @@ main {
     overflow: hidden;
     height: 85%;
     width: auto;
+    transition: transform 0.5s;
 }
 
 @media (max-width: 900px)
@@ -671,6 +673,12 @@ input[type="radio"]:hover {
     background-image: linear-gradient(to right, var(--primary) 50%, var(--secondary) 100%);
     border-radius: 10px;
     display: flex;
+}
+
+@media (max-width: 900px) {
+    .saaya-timeline__line {
+        height: 4px;
+    }
 }
 
 .saaya-timeline::-webkit-scrollbar {
